@@ -37,37 +37,43 @@ function drawCell(cell) {
             ctx.fillStyle = '#d9ce86'; //warna dasar
             break;
         case 2:
-            ctx.fillStyle = '#a7a82c'; //score 2
+            ctx.fillStyle = '#a7a82c'; //warna cell score 2
             break;
         case 4:
-            ctx.fillStyle = '#86873a'; // score 4
+            ctx.fillStyle = '#86873a'; // warna cell score 4
             break;
         case 8:
-            ctx.fillStyle = '#aaab6d'; // score 8
+            ctx.fillStyle = '#aaab6d'; // warna cell score 8
             break;
         case 16:
-            ctx.fillStyle = '#e7e89e'; // score 16
+            ctx.fillStyle = '#e7e89e'; // warna cell score 16
             break;
         case 32:
-            ctx.fillStyle = '#d7d959'; // score 32
+            ctx.fillStyle = '#d7d959'; // warna cell score 32
             break;
         case 64:
-            ctx.fillStyle = '#fcff36'; // score 64
+            ctx.fillStyle = '#fcff36'; // warna cell score 64
             break;
         case 128:
-            ctx.fillStyle = '#91d47b'; // score 128
+            ctx.fillStyle = '#91d47b'; // warna cell score 128
             break;
         case 256:
-            ctx.fillStyle = '#3fd98e'; // score 256
+            ctx.fillStyle = '#3fd98e'; // warna cell score 256
             break;
         case 512:
-            ctx.fillStyle = '#34cfc2'; // score 512
+            ctx.fillStyle = '#34cfc2'; // warna cell score 512
             break;
         case 1024:
-            ctx.fillStyle = '#34adcf'; // score 1024
+            ctx.fillStyle = '#34adcf'; // warna cell score 1024
+            canvas.style.opacity = '0.3';
+            endLabel.innerHTML =
+                'Selamat Anda berhasil menyelesaikan permainan!';
+            break;
+        case 2048:
+            ctx.fillStyle = '#005c75'; // warna cell score 512
             break;
         default:
-            ctx.fillStyle = '#ff0080';
+            ctx.fillStyle = '#488b99';
     }
 
     ctx.fill();
