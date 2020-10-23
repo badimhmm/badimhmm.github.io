@@ -2,7 +2,6 @@ let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 
 let sizeInput = document.getElementById('size');
-// let changeSize = document.getElementById('change-size');
 let scoreLabel = document.getElementById('score');
 
 let score = 0;
@@ -13,16 +12,6 @@ let fontSize;
 let loss = false;
 startGame();
 
-/* changeSize.onclick = function () {
-    if (sizeInput.value >= 2 && sizeInput.value <= 20) {
-        size = sizeInput.value;
-        width = canvas.width / size - 6;
-        console.log(sizeInput.value);
-        canvasClean();
-        startGame();
-    }
-};
- */
 function cell(row, coll) {
     this.value = 0;
     this.x = coll * width + 5 * (coll + 1);
@@ -109,10 +98,10 @@ function drawAllCells() {
     }
 }
 
-/* function canvasClean() {
+function canvasClean() {
     ctx.clearRect(0, 0, 500, 500);
 }
- */
+
 document.onkeydown = function (event) {
     if (!loss) {
         if (event.keyCode === 38 || event.keyCode === 87) {
