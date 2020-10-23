@@ -20,14 +20,29 @@ function cell(row, coll) {
 }
 
 function createCells() {
-    let i, j;
-    for (i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         cells[i] = [];
-        for (j = 0; j < size; j++) {
+        for (let j = 0; j < size; j++) {
             cells[i][j] = new cell(i, j);
         }
     }
 }
+
+document.onkeydown = function (event) {
+    endLabel.innerHTML = 'Selamat bermain!';
+    if (!loss) {
+        if (event.keyCode === 38 || event.keyCode === 87) {
+            moveUp();
+        } else if (event.keyCode === 39 || event.keyCode === 68) {
+            moveRight();
+        } else if (event.keyCode === 40 || event.keyCode === 83) {
+            moveDown();
+        } else if (event.keyCode === 37 || event.keyCode === 65) {
+            moveLeft();
+        }
+        scoreLabel.innerHTML = 'Score : ' + score;
+    }
+};
 
 function drawCell(cell) {
     ctx.beginPath();
@@ -66,11 +81,7 @@ function drawCell(cell) {
         case 1024:
             ctx.fillStyle = '#34adcf'; // warna cell score 1024
             canvas.style.opacity = '0.3';
-            endLabel.innerHTML =
-                'Selamat Anda berhasil menyelesaikan permainan!';
-            break;
-        case 2048:
-            ctx.fillStyle = '#005c75'; // warna cell score 512
+            endLabel.innerHTML = 'Selamat! Anda memenangkan permainan';
             break;
         default:
             ctx.fillStyle = '#488b99';
@@ -91,9 +102,8 @@ function drawCell(cell) {
 }
 
 function drawAllCells() {
-    let i, j;
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
             drawCell(cells[i][j]);
         }
     }
@@ -102,21 +112,6 @@ function drawAllCells() {
 function canvasClean() {
     ctx.clearRect(0, 0, 500, 500);
 }
-
-document.onkeydown = function (event) {
-    if (!loss) {
-        if (event.keyCode === 38 || event.keyCode === 87) {
-            moveUp();
-        } else if (event.keyCode === 39 || event.keyCode === 68) {
-            moveRight();
-        } else if (event.keyCode === 40 || event.keyCode === 83) {
-            moveDown();
-        } else if (event.keyCode === 37 || event.keyCode === 65) {
-            moveLeft();
-        }
-        scoreLabel.innerHTML = 'Score : ' + score;
-    }
-};
 
 function startGame() {
     createCells();
@@ -127,9 +122,8 @@ function startGame() {
 
 function pasteNewCell() {
     let countFree = 0;
-    let i, j;
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
             if (!cells[i][j].value) {
                 countFree++;
             }
@@ -152,11 +146,10 @@ function pasteNewCell() {
 }
 
 function moveUp() {
-    let i, j, row;
-    for (j = 0; j < size; j++) {
-        for (i = 1; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+        for (let i = 1; i < size; i++) {
             if (cells[i][j].value) {
-                row = i;
+                let row = i;
                 while (row > 0) {
                     if (!cells[row - 1][j].value) {
                         cells[row - 1][j].value = cells[row][j].value;
@@ -178,12 +171,10 @@ function moveUp() {
 }
 
 function moveRight() {
-    let i, j;
-    let coll;
-    for (i = 0; i < size; i++) {
-        for (j = size - 2; j >= 0; j--) {
+    for (let i = 0; i < size; i++) {
+        for (let j = size - 2; j >= 0; j--) {
             if (cells[i][j].value) {
-                coll = j;
+                let coll = j;
                 while (coll + 1 < size) {
                     if (!cells[i][coll + 1].value) {
                         cells[i][coll + 1].value = cells[i][coll].value;
@@ -207,11 +198,10 @@ function moveRight() {
 }
 
 function moveDown() {
-    let i, j, row;
-    for (j = 0; j < size; j++) {
-        for (i = size - 2; i >= 0; i--) {
+    for (let j = 0; j < size; j++) {
+        for (let i = size - 2; i >= 0; i--) {
             if (cells[i][j].value) {
-                row = i;
+                let row = i;
                 while (row + 1 < size) {
                     if (!cells[row + 1][j].value) {
                         cells[row + 1][j].value = cells[row][j].value;
@@ -233,12 +223,10 @@ function moveDown() {
 }
 
 function moveLeft() {
-    let i, j;
-    let coll;
-    for (i = 0; i < size; i++) {
-        for (j = 1; j < size; j++) {
+    for (let i = 0; i < size; i++) {
+        for (let j = 1; j < size; j++) {
             if (cells[i][j].value) {
-                coll = j;
+                let coll = j;
                 while (coll - 1 >= 0) {
                     if (!cells[i][coll - 1].value) {
                         cells[i][coll - 1].value = cells[i][coll].value;
@@ -264,5 +252,9 @@ function moveLeft() {
 function finishGame() {
     canvas.style.opacity = '0.3';
     loss = true;
-    endLabel.innerHTML = 'Game Over!';
+    endLabel.innerHTML =
+        'Permainan berakhir! Silahkan muat ulang haman untuk bermain kembali.';
+    document.onkeydown = function (event) {
+        return false;
+    };
 }
