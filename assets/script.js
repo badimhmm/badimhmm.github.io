@@ -3,9 +3,10 @@ let ctx = canvas.getContext('2d');
 
 let sizeInput = document.getElementById('size');
 let scoreLabel = document.getElementById('score');
+let endLabel = document.getElementById('welcome');
 
 let score = 0;
-let size = 3;
+let size = 4; // lebar papan main
 let width = canvas.width / size - 6;
 let cells = [];
 let fontSize;
@@ -33,43 +34,37 @@ function drawCell(cell) {
     ctx.rect(cell.x, cell.y, width, width);
     switch (cell.value) {
         case 0:
-            ctx.fillStyle = '#A9A9A9';
+            ctx.fillStyle = '#d9ce86'; //warna dasar
             break;
         case 2:
-            ctx.fillStyle = '#D2691E';
+            ctx.fillStyle = '#a7a82c'; //score 2
             break;
         case 4:
-            ctx.fillStyle = '#FF7F50';
+            ctx.fillStyle = '#86873a'; // score 4
             break;
         case 8:
-            ctx.fillStyle = '#ffbf00';
+            ctx.fillStyle = '#aaab6d'; // score 8
             break;
         case 16:
-            ctx.fillStyle = '#bfff00';
+            ctx.fillStyle = '#e7e89e'; // score 16
             break;
         case 32:
-            ctx.fillStyle = '#40ff00';
+            ctx.fillStyle = '#d7d959'; // score 32
             break;
         case 64:
-            ctx.fillStyle = '#00bfff';
+            ctx.fillStyle = '#fcff36'; // score 64
             break;
         case 128:
-            ctx.fillStyle = '#FF7F50';
+            ctx.fillStyle = '#91d47b'; // score 128
             break;
         case 256:
-            ctx.fillStyle = '#0040ff';
+            ctx.fillStyle = '#3fd98e'; // score 256
             break;
         case 512:
-            ctx.fillStyle = '#ff0080';
+            ctx.fillStyle = '#34cfc2'; // score 512
             break;
         case 1024:
-            ctx.fillStyle = '#D2691E';
-            break;
-        case 2048:
-            ctx.fillStyle = '#FF7F50';
-            break;
-        case 4096:
-            ctx.fillStyle = '#ffbf00';
+            ctx.fillStyle = '#34adcf'; // score 1024
             break;
         default:
             ctx.fillStyle = '#ff0080';
@@ -261,6 +256,7 @@ function moveLeft() {
 }
 
 function finishGame() {
-    canvas.style.opacity = '0.5';
+    canvas.style.opacity = '0.3';
     loss = true;
+    endLabel.innerHTML = 'Game Over!';
 }
